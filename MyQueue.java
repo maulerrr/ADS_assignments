@@ -1,17 +1,16 @@
 import java.util.NoSuchElementException;
 
 public class MyQueue<T extends Comparable<T>>{
-    MyArrayList<T> list;
-    private final int strict_capacity = list.getCapacity();
+    MyLinkedList<T> list;
+    private final int strict_capacity = 10;
 
     public MyQueue(){
-        list = new MyArrayList<>();
-        list.setCapacity(10);
+        list = new MyLinkedList<>();
     }
 
     public boolean add(T item){
         if (item != null && list.size() != strict_capacity) {
-            list.add(item, 0);
+            list.add(item);
             return true;
         } else if(item != null){
             System.out.println("Null element cannot be added to the QUEUE!");
@@ -25,7 +24,7 @@ public class MyQueue<T extends Comparable<T>>{
 
     public boolean offer(T item){
         if (list.size() != strict_capacity && item != null){
-            list.add(item, 0);
+            list.add(item);
             return true;
         } else if(item == null){
             System.out.println("Null element cannot be added to the QUEUE!");
@@ -46,7 +45,7 @@ public class MyQueue<T extends Comparable<T>>{
 
     public T peek(){
         if (list.size() != 0)
-            return list.get(list.size()-1);
+            return list.get(0);
         return null;
     }
 
@@ -67,4 +66,18 @@ public class MyQueue<T extends Comparable<T>>{
         return null;
     }
 
+    public int size(){
+        return list.size();
+    }
+
+    public boolean empty(){
+        return list.size() == 0;
+    }
+
+    public void printQueue(){
+        System.out.println("Queue: ");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i)+" ");
+        }
+    }
 }
