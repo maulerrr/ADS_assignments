@@ -16,15 +16,12 @@ public class MyHeap<T extends Comparable<T>>{
         if (list.contains(item)){
             swap(list.indexOf(item), size()-1);
             boolean removed = list.remove(item);
-            heapify();
+            heapify(0);
             return removed;
         } else return false;
     }
 
-    private void heapify() {
-        heapify(size() - 1, 0);
-    }
-    private void heapify(int size, int index)
+    private void heapify(int index)
     {
         int min   = index;
         int left  = 2 * index + 1;
@@ -34,15 +31,15 @@ public class MyHeap<T extends Comparable<T>>{
         T leftEl = leftChildOf(index);
         T rightEl = rightChildOf(index);
 
-        if (right <= (size) && rightEl.compareTo(minEl) < 0)
+        if (right <= (size()-1) && rightEl.compareTo(minEl) < 0)
             min = right;
 
-        if (left <= (size) && leftEl.compareTo(minEl) < 0)
+        if (left <= (size()-1) && leftEl.compareTo(minEl) < 0)
             min = left;
 
         if (min != index) {
             swap(index, min);
-            heapify(size, min);
+            heapify(min);
             traverseUp(index);
         }
     }
@@ -50,7 +47,7 @@ public class MyHeap<T extends Comparable<T>>{
     public T removeRoot(){
         if (list.size() != 0) {
             T removed = list.remove(root);
-            heapify();
+            heapify(0);
             return removed;
         }
         return null;
