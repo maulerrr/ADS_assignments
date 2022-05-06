@@ -73,6 +73,7 @@ public class MyHashTable<K extends Comparable<K>, V> {
         while (cursor != null){
             if ((cursor.key).equals(key)){
                 cursor.value = value;
+                System.out.println("Node with such key already exists");
                 return;
             } cursor = cursor.next;
         }
